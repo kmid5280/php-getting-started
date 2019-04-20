@@ -19,18 +19,12 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
 
 $app->get('/', function() use($app) {
   $app['monolog']->addDebug('logging output.');
-  return $app['twig']->render('index.twig');
+  return str_repeat('Hello', getenv('TIMES'));
 });
 
 $app->get('/cowsay', function() use($app) {
   $app['monolog']->addDebug('cowsay');
   return "<pre>".\Cowsayphp\Cow::say("Cool beans")."</pre>";
 });
-
-$app->get('/demo', function() use($app) {
-  $app['monolog']->addDebug('demo');
-  return $app['demo']->render('demo.twig');
-});
-
 
 $app->run();
