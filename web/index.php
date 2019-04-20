@@ -15,6 +15,10 @@ $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/views',
 ));
 
+$app->register(new Silex\Provider\DemoServiceProvider(), array(
+  'demo.path' => __DIR__.'/views',
+));
+
 // Our web handlers
 
 $app->get('/', function() use($app) {
@@ -28,7 +32,7 @@ $app->get('/cowsay', function() use($app) {
 });
 
 $app->get('/demo', function() use($app) {
-  $app['monolog']->addDebug('logging output');
+  $app['monolog']->addDebug('demo');
   return $app['demo']->render('demo.twig');
 });
 
